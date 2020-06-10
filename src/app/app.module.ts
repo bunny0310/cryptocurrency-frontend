@@ -8,13 +8,24 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
-import {MatInputModule, MatFormFieldModule, MatButtonModule, MatTableDataSource, MatTableModule, 
-  MatBadgeModule, MatExpansionModule, MatChipsModule, MatPaginatorModule, MatProgressBarModule,
-   MatSidenavModule, MatCheckboxModule, MatListModule, MatToolbarModule} from '@angular/material/';
 import { FormsModule } from '@angular/forms';
 import { TransactionPoolMapComponent } from './transaction-pool-map/transaction-pool-map.component';
 import { BlocksComponent } from './blocks/blocks.component';
 import { BlockComponent } from './block/block.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 @NgModule({

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import {Transaction} from '../models/transaction.model';
 import { NgForm } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface TransactionMap {
   id: string;
