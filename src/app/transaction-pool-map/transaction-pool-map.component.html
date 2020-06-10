@@ -35,7 +35,7 @@
                         </div>
 
                         <h6 *ngIf="transactionPoolMapData.length===0">No transactions made yet!</h6>
-                        <mat-accordion>
+                        <mat-accordion *ngIf="transactionPoolMapData.length!==0">
                                 <mat-expansion-panel *ngFor = "let transaction of transactionPoolMapData">
                                   <mat-expansion-panel-header>
                                     <mat-panel-title>
