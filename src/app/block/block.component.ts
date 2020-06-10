@@ -18,8 +18,7 @@ export class BlockComponent implements OnInit {
   walletInfoSub: Subscription;
   walletInfo;
 
-  constructor(private route: ActivatedRoute, private blocksService: BlocksService,
-  public walletInfoService: WalletInfoServiceService) { }
+  constructor(private route: ActivatedRoute, private blocksService: BlocksService, public walletInfoService: WalletInfoServiceService) { }
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
