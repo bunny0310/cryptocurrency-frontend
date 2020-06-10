@@ -13,12 +13,12 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'frontend';
   loading;
-  walletInfo: {};
+  walletInfo: {address: string, balance: number};
   walletInfoSub: Subscription;
   walletTimeOut = setInterval(() => this.getWalletInfo(), 1000);
   getWalletInfo() {
     this.walletInfoService.getWalletInfo();
-    this.walletInfoSub = this.walletInfoService.getWalletInfoUpdateListener().subscribe((data) => {
+    this.walletInfoSub = this.walletInfoService.getWalletInfoUpdateListener().subscribe((data: {walletInfo}) => {
       this.walletInfo = data.walletInfo;
     });
   }
