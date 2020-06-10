@@ -1,0 +1,60 @@
+<br>
+<div class="main-div">
+    <mat-card class="z-depth center" flex="50" >
+        <mat-card-header class="center-text">
+            <mat-card-title>Block {{getId()}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content style="overflow: scroll;padding-bottom: 0px">
+            <b>Block's last lash: </b>{{block.lastHash}}
+            <br>
+            <b>Block's lash: </b>{{block.hash}}
+            <br>
+            <b>Block's timestamp: </b>{{block.timestamp|date:'full'}}
+            <br>
+            <b>Block's difficulty: </b>{{block.difficulty}}
+            <br>
+            <b>Block's nonce: </b>{{block.nonce}}
+            <br>
+            <b>Block's number of reward transactions: </b>{{block.rewardCount}}
+            <br>
+            <b>Block's number of regular transactions: </b>{{block.transactCount}}
+            <br>
+            <br>
+            <mat-divider></mat-divider>
+            <br>
+            <h6 class="center-text"> Transactions</h6>
+            <br>
+            <div *ngFor="let transaction of block.data">
+                <b>Transaction Id: </b>{{transaction.id}}
+                <br>
+                <b>Type of transaction: </b>{{transaction.input.address === '*authorized-reward*'?'Reward':'Regular'}}
+                <div class="regular" *ngIf="transaction.input.address !== '*authorized-reward*'">
+                    <br><br>
+                    <b>Transaction Input: </b>
+                    <br>
+                    <div class="intend1" style="margin-left:20px;">
+                        <b>Address: </b>{{transaction.input.address}}
+                        <br>
+                        <b>Amount: </b>{{transaction.input.amount|number:'.2-4'}}
+                        <br>
+                        <b>Signature: </b>{{transaction.input.signature|json}}
+                    </div>
+                    <br><br>
+                    <b>Transaction Output Map: </b>
+                    <br>
+                    <div class="intend1" style="margin-left:20px;">
+                        <div *ngFor="let output of transaction.outputMap|keyvalue">
+                            <b>{{output.key }}: </b>{{output.value|number:'.2-4'}}
+                        </div>
+                    </div>
+                </div>
+                <div class="reward" *ngIf="transaction.input.address === '*authorized-reward*'">
+                    <b>Reward: </b>{{transaction.outputMap[walletInfo.address]}}
+                </div>
+                <mat-divider></mat-divider>
+                <br>
+            </div>
+        </mat-card-content>
+
+    </mat-card> 
+</div>

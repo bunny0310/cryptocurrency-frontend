@@ -1,0 +1,58 @@
+<div class="container">`
+        <div class="row">
+                <div class="col-sm-6">
+                    <h6 class="text-info">
+                        Create a transaction
+                    </h6>
+                    <form class="transaction-form" #transactForm="ngForm" (submit)="setTransaction(transactForm)">
+                        <mat-form-field>
+                            <mat-label>Recipient</mat-label>
+                            <input name="recipient" ngModel #recipient="ngModel" matInput placeholder="" value="">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field>
+                                <mat-label>Amount</mat-label>
+                                <input name="amount" type="number" ngModel #name="ngModel" matInput placeholder="" value="">
+                        </mat-form-field>
+                        <br>
+                        <button mat-raised-button color="primary" type="submit">Make Transaction</button>
+                    </form>
+                </div>
+                <div class="col-sm-6">
+                        <div class="transactionPoolMapHeader" style="display: inline">
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                                <h6 class="text-info">Transaction Pool Map</h6>
+                                        </div>                                                                           
+                                </div>
+                                <br>
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                                <button mat-raised-button color="primary" class="float-right" [matBadge]="transactionPoolMapData.length" matBadgePosition="before" matBadgeColor="warn" (click)="mineTransactions()">Mine transaction(s)</button>
+                                        </div>   
+                                </div>
+                                <br>
+                        </div>
+
+                        <h6 *ngIf="transactionPoolMapData.length===0">No transactions made yet!</h6>
+                        <mat-accordion>
+                                <mat-expansion-panel *ngFor = "let transaction of transactionPoolMapData">
+                                  <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                      <b>Id: {{ transaction.id | slice:0:10}}....</b>
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                      Number of recipients: {{(transaction.outputMap|keyvalue).length-1}}
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <b>Transaction Id: </b>{{transaction.id}}
+                                <br><br>
+                                <b>Recipients:</b>
+                                <div *ngFor="let recipient of transaction.outputMap|keyvalue">
+                                    <b *ngIf="recipient.key!==transaction.input.address">{{recipient.key}}:</b>
+                                    <span *ngIf="recipient.key!==transaction.input.address">{{recipient.value}}</span>
+                                </div>
+                                </mat-expansion-panel>
+                              </mat-accordion>
+            </div>
+</div>

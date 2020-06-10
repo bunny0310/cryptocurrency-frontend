@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" style="position:sticky;top: 0;z-index: 1000;">
+  <span class="mobile-hidden">
+      <a [routerLink]="['']" style="text-decoration: none;color:white">
+        <mat-icon>link</mat-icon>
+        <mat-icon>monetization_on</mat-icon>
+        <span style="font-family: 'Comic Sans MS'">Ishaan's cryptocurrency and blockchain</span>
+      </a>
+  </span>
+  <span style="flex: 1 1 auto;"></span>
+  <span>
+    <span style="font-size:14px">Wallet's balance: ${{walletInfo.balance | number: '.2-4'}}</span>
+    <button mat-icon-button style="float:right">
+      <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+    </button>
+  </span>
+  </mat-toolbar>
+  <mat-progress-bar *ngIf="blocksService.loading || loading"
+  color="warn" mode="indeterminate">
+</mat-progress-bar>
+<!-- <br> -->
+<mat-drawer-container class="example-container" hasBackdrop="true">
+    <mat-drawer #drawer mode="side" position="end" style="width:300px;">
+        <br>
+      <div class="container">
+          <div class="sidenav">
+            <h5>Your wallet's info:</h5>
+            <b>Address: </b> {{walletInfo.address.substring(0,10)}}<span *ngIf="walletInfo.address.length>10">...</span>
+            <br>
+            <b>Balance: </b> ${{walletInfo.balance | number: '.2-4'}}
+            <mat-divider></mat-divider><br> 
+            <button mat-stroked-button color="primary" [routerLink]="['transaction-pool-map']">Create Transactions</button>
+          </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content style="min-height:800px; height:auto">
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>

@@ -1,0 +1,23 @@
+
+.sidenav
+ {
+     margin:auto;
+     text-align: center;
+ }
+ .sidenav button
+  {
+      width:200px;
+      display: inline-block;
+
+  }
+  /* .icon-toolbar
+  {
+      height:auto;
+      width:auto;
+      max-height:50px;
+  } */
+  @media only screen and (max-width: 700px) {
+    .mobile-hidden {
+      font-size:10px;
+    }
+  }
