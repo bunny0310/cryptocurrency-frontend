@@ -11,7 +11,7 @@ import {TransactionPoolMapComponent} from '../transaction-pool-map/transaction-p
   styleUrls: ['./wallet-info.component.css']
 })
 export class WalletInfoComponent implements OnInit {
-  walletInfo: {address: string, balance: number} = {};
+  walletInfo: any = {};
   transactionPoolMap: {};
   private walletInfoSub: Subscription;
   constructor(public walletInfoService: WalletInfoServiceService) {}
