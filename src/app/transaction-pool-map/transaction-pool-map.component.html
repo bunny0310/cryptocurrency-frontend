@@ -42,7 +42,7 @@
                                       <b>Id: {{ transaction.id | slice:0:10}}....</b>
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                      Number of recipients: {{(transaction.outputMap|keyvalue).length-1}}
+                                      Number of recipients: <span *ngIf="(transaction.outputMap)!==null">{{(transaction.outputMap|keyvalue).length-1}}</span>
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <b>Transaction Id: </b>{{transaction.id}}
