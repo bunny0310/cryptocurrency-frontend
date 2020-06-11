@@ -44,8 +44,10 @@ export class BlockComponent implements OnInit {
 
   setBlock() {
     this.block = this.blockchain[this.id];
+    let prevBlock: any;
     let rewardCount = 0;
     let transactCount = 0;
+    let mineTime = 0;
     for (const transaction of this.block.data) {
         if (transaction.input.address === '*authorized-reward*') {
           rewardCount++;
@@ -55,6 +57,10 @@ export class BlockComponent implements OnInit {
     }
     this.block['rewardCount'] = rewardCount;
     this.block['transactCount'] = transactCount;
+    prevBlock = this.blockchain[this.id - 1];
+    mineTime = this.block.timestamp - prevBlock.timestamp;
+    console.log(mineTime);
+    this.block['mineTime'] = mineTime;
   }
 
 }

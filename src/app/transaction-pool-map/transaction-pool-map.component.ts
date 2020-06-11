@@ -5,6 +5,7 @@ import {Transaction} from '../models/transaction.model';
 import { NgForm } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { MatTableDataSource } from '@angular/material/table';
+import { BlocksService } from '../blocks.service';
 
 export interface TransactionMap {
   id: string;
@@ -23,9 +24,16 @@ export class TransactionPoolMapComponent implements OnInit, OnDestroy{
   transactionPoolMapData: TransactionMap[] = [];
   displayedColumns: string[] = ['id', 'outputMap', 'input'];
   private transactionPoolMapSub: Subscription;
-  constructor(public transactionPoolMapService: TransactionPoolMapService, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(public transactionPoolMapService: TransactionPoolMapService, private changeDetectorRefs: ChangeDetectorRef,
+  private blocksService: BlocksService
+    ) {
   }
-  timeOutForMap = setInterval(() => this.populateTransactionPoolMap(), 1000);
+   timeOutForMap = setInterval(() => {
+     if (this.transactionPoolMapService.updateMap === true) {
+      this.populateTransactionPoolMap();
+      this.transactionPoolMapService.updateMap = false;
+     }
+    }, 1000);
   populateTransactionPoolMap() {
     const dataSource: TransactionMap[] = [];
     this.transactionPoolMapService.getTransactionPoolMap();
@@ -39,11 +47,13 @@ export class TransactionPoolMapComponent implements OnInit, OnDestroy{
     });
   }
   ngOnInit() {
+      this.blocksService.setLoading(false);
+      this.transactionPoolMapService.updateMap = false;
       this.populateTransactionPoolMap();
   }
 
   ngOnDestroy() {
-    clearInterval(this.timeOutForMap);
+     clearInterval(this.timeOutForMap);
   }
 
   setTransaction(form: NgForm) {
@@ -53,11 +63,12 @@ export class TransactionPoolMapComponent implements OnInit, OnDestroy{
       amount, recipient
     };
     this.transactionPoolMapService.AddTransaction(transaction);
-    this.populateTransactionPoolMap();
     console.log(this.transactionPoolMap);
   }
 
   mineTransactions() {
+    this.blocksService.setLoading(true);
+    this.blocksService.setIsMining(true);
     this.transactionPoolMapService.mineTransactions();
     this.populateTransactionPoolMap();
   }

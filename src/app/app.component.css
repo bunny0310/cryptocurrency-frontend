@@ -20,4 +20,35 @@
     .mobile-hidden {
       font-size:10px;
     }
+    .center {
+      height:400px !important;
+    }
+  }
+  @media only screen and (max-height: 650px) {
+    .mobile-hidden {
+      font-size:10px;
+    }
+    .center {
+      height:400px !important;
+    }
+
+  }
+
+  .loading {
+    background-color: grey;
+  }
+  .main-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .center{
+    width: 40%;
+    margin: 10px auto;
+    height:520px;
+    overflow: scroll;
+  }
+  .center-text {
+    display: flex;
+    justify-content: center;
   }
