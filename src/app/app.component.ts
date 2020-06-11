@@ -15,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   loading;
   walletInfo: {address: string, balance: number};
   walletInfoSub: Subscription;
-  walletTimeOut = setInterval(() => this.getWalletInfo(), 1000);
+  walletTimeOut = setInterval(() => this.getWalletInfo(), 10000);
   getWalletInfo() {
     this.walletInfoService.getWalletInfo();
     this.walletInfoSub = this.walletInfoService.getWalletInfoUpdateListener().subscribe((data: {walletInfo}) => {
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
    ngOnInit() {
     this.getWalletInfo();
+    console.log('isMining? ', this.blocksService.isMining);
   }
 
   ngOnDestroy() {

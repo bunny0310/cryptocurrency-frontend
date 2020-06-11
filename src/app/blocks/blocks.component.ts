@@ -9,7 +9,6 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./blocks.component.css']
 })
 export class BlocksComponent implements OnInit {
-  public blockchainLoading;
   blockchain: [] = [];
   blockchainView: any = [];
   pageSize = 10;

@@ -10,6 +10,7 @@ export class BlocksService {
   constructor(private http: HttpClient) {}
   private blockchain: {};
   loading = false;
+  public isMining = false;
   private blockchainUpdated = new Subject<{blockchain: any}>();
 
   setLoading(value: boolean) {
@@ -18,11 +19,20 @@ export class BlocksService {
   getLoading() {
     return this.getLoading;
   }
+  setIsMining(value: boolean) {
+    this.isMining = value;
+  }
+  getIsMining() {
+    return this.getLoading;
+  }
   getBlockchain() {
-    this.http.get(environment.url + '/api/blocks')
+    this.http.get(environment.url + '/api/blocks', {observe: 'response'})
     .subscribe((data) => {
-      this.blockchain = data;
-      this.blockchainUpdated.next({blockchain: data});
+      if (data.status === 503) {
+        this.setIsMining(true);
+      }
+      this.blockchain = data.body;
+      this.blockchainUpdated.next({blockchain: data.body});
       console.log(data);
     });
   }
