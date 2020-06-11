@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject, Subscription } from 'rxjs';
 import { Transaction } from './models/transaction.model';
+import { environment } from './environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class TransactionPoolMapService {
   private transactionPoolMapSub: Subscription;
 
   getTransactionPoolMap() {
-    this.http.get('http://localhost:3000/api/transaction-pool-map')
+    this.http.get(environment.url + '/api/transaction-pool-map')
     .subscribe((data: any) => {
       this.transactionPoolMap = data.transactionPoolMap;
       this.transactionPoolMapUpdated.next({transactionPoolMap: data.transactionPoolMap});
@@ -27,12 +28,12 @@ export class TransactionPoolMapService {
   }
 
   mineTransactions() {
-    this.http.get('http://localhost:3000/api/mine-transactions').
+    this.http.get(environment.url + '/api/mine-transactions').
     subscribe(() => {});
   }
 
   AddTransaction(transaction: Transaction) {
-    this.http.post('http://localhost:3000/api/transact', transaction)
+    this.http.post(environment.url + '/api/transact', transaction)
     .subscribe((data) => {
       console.log(data);
     });

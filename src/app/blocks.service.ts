@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { environment } from './environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class BlocksService {
     return this.getLoading;
   }
   getBlockchain() {
-    this.http.get('http://localhost:3000/api/blocks')
+    this.http.get(environment.url + '/api/blocks')
     .subscribe((data) => {
       this.blockchain = data;
       this.blockchainUpdated.next({blockchain: data});
