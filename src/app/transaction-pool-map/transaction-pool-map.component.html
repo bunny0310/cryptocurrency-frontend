@@ -37,12 +37,12 @@
                         <h6 *ngIf="transactionPoolMapData.length===0">No transactions made yet!</h6>
                         <mat-accordion *ngIf="transactionPoolMapData.length!==0">
                                 <mat-expansion-panel *ngFor = "let transaction of transactionPoolMapData">
-                                  <mat-expansion-panel-header>
+                                  <mat-expansion-panel-header *ngIf="transaction!==null">
                                     <mat-panel-title>
                                       <b>Id: {{ transaction.id | slice:0:10}}....</b>
                                     </mat-panel-title>
                                     <mat-panel-description>
-                                      Number of recipients: <span *ngIf="(transaction.outputMap|keyvalue)!==null">{{(transaction.outputMap|keyvalue).length-1}}</span>
+                                      <!-- Number of recipients: <span *ngIf="(transaction.outputMap|keyvalue)!==null">{{(transaction.outputMap|keyvalue).length-1}}</span> -->
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
                                 <b>Transaction Id: </b>{{transaction.id}}
